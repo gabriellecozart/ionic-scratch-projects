@@ -1,0 +1,26 @@
+
+<ion-header>
+  <ion-navbar color="primary">
+    <!--<button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>-->
+    <ion-title > Headlines on the go</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <h2>{{storyDetail.title}}</h2>
+    <ion-list  *ngIf="storyDetail" text-wrap>
+        <ion-item>
+            <p style="color:darkblue;"> {{storyDetail.dateCreated }}</p>
+            <p>{{storyDetail.body}}</p>
+        </ion-item>
+    </ion-list>  
+
+</ion-content>
+<ion-footer>
+    <ion-navbar color="primary">
+
+        <ion-title>Hackathon 2017</ion-title>
+    </ion-navbar>
+</ion-footer>

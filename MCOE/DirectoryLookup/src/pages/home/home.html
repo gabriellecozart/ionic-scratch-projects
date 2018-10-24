@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-navbar color="light">
+    <ion-icon item-left>
+        <img src="Lookup.png">
+    </ion-icon>
+
+    <ion-title  >
+      <ion-label color="secondary" style="text-shadow: 0 1px 0 #005599" >Directory Lookup</ion-label>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content  class="Bkgrnd">
+    <form (ngSubmit)="search()" #registerForm="ngForm" >
+        <div text-wrap style="padding-left:10px; padding-top:5px">
+            
+            <label> <strong> Network Id, First Name, Last Name, Full Name, Email Id, Mail Code</strong> <small>(begins with)</small></label>
+            <ion-item no-lines>
+                <ion-input type="text" clearInput name="search1" [(ngModel)]="ANR"></ion-input>
+            </ion-item>
+            <label> <strong>Department </strong> <small>(contains)</small></label>
+            <ion-item no-lines >
+                <ion-input type="text" clearInput name="search2" [(ngModel)]="Department"></ion-input>
+            </ion-item>
+            <label> <strong>Phone </strong><small>(allows partial search)</small> </label><br/>
+         </div>
+
+        <ion-row style="width:100%;margin-left:10px; column-gap:0px;">
+                <ion-col col-4 style="padding:0px; margin:-2px">
+                <ion-item no-lines style="padding:0px;">
+                    <ion-label style="margin:0px">(</ion-label>
+                    <ion-input type="number" item-right clearInput  name="search3" [(ngModel)]="PhoneAreaCd"></ion-input>
+                </ion-item>
+            </ion-col>
+            <ion-col col-4 style="padding:0px; margin:-2px">
+                <ion-item no-lines style="padding:0px;">
+                    <ion-label style="margin:0px" >)</ion-label>
+                    <ion-input type="number" clearInput name="search4" item-right [(ngModel)]="PhoneFirst3"></ion-input>
+                        
+                </ion-item>
+            </ion-col>
+            <ion-col col-4 style="padding:0px;margin:-2px">
+                <ion-item no-lines style="padding:0px;">
+                    <ion-label style="margin:0px">-</ion-label>
+                    <ion-input type="number" clearInput name="search5" item-right [(ngModel)]="PhoneLast4"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+        <!--<div style="padding-left:20px">-->
+                <!--<ion-item no-lines>-->
+                <!--(<input type="number" name="search3" maxlength="3" style="text-align:center" [(ngModel)]="PhoneAreaCd" />)-->
+                <!--</ion-item>-->
+               
+                <!--<ion-item no-lines>-->
+                <!--<input type="number" name="search4" maxlength="3" style="text-align:center" [(ngModel)]="PhoneFirst3"/>--->
+                <!--</ion-item>-->
+              
+                <!--<ion-item no-lines>-->
+                <!--<input  type="number" name="search5" max="9999" [(ngModel)]="PhoneLast4"/>-->
+                <!--</ion-item>-->
+        <!--</div>-->        
+        <div style="padding-left:10px; padding-right:10px">
+            <button ion-button block color="secondary" type="submit" [disabled]="(!ANR) && (!Department) && (!PhoneAreaCd) && (!PhoneFirst3) && (!PhoneLast4)">
+                <ion-icon name="search" item-left></ion-icon>
+                <ion-label> Search </ion-label>
+            </button>
+        </div>
+        
+</form>
+    <div *ngIf="showResult" style="padding-left:3px; padding-right:3px; padding-top:5px" >
+        <ion-list >
+            <ion-item *ngFor="let employee of employees" style="border:2px ridge;" >
+                <div class="EmpName">
+                    <label >{{employee.DisplayName}}</label> <br />
+                </div>
+                <label class="Smaller"> <strong>{{employee.NetworkID}}</strong></label><br/>
+                <label class="Listdata Sienna">{{employee.JobTitle}}</label><br/>
+                <label class="Listdata Maroon Smaller">{{employee.Department}}</label><br />
+                <label class="Listdata Black">{{employee.Company}}</label><br />
+                <label class="Smaller"> <strong>MailCode: {{employee.MailCode}}</strong></label><br />
+                <label class="Listdata "><a  href="{{'mailto:' + employee.EmailID}}"> {{employee.EmailID}}</a></label><br />
+                <label class="Listdata Black">Work: <a href="{{'tel:+1' + employee.WorkNumber}}"> {{employee.WorkNumber}} </a></label><label class="Smaller">(x{{employee.WorkExtension}})</label><br />
+                <label class="Listdata Black">
+                    Mobile: <a href="tel:+1{{employee.CellNumber}}">{{employee.CellNumber}}</a>
+                    &nbsp; &nbsp;
+                    <a  [attr.href]="'sms:+1'+employee.CellNumber | safeUrl" [hidden]="employee.CellNumber.length == 0"> <!--sanitize safeurl to enable sms-->
+                        <ion-icon name="chatboxes"></ion-icon>
+                    </a>
+                    <!-- working examples of sms:
+                        <a href="sms:+19378294857" >
+                            <ion-icon name="chatboxes"></ion-icon>
+                        </a>
+                        <a [href]="sanitize('sms:'+ employee.CellNumber)">
+                            <ion-icon name="chatboxes"></ion-icon>
+                        </a>-->
+                </label>
+                <ion-avatar [hidden]="!employee.EmpImage" >
+                    <img src="data:image/jpeg;base64,{{employee.EmpImage}}">
+                </ion-avatar>
+                
+                <button ion-button block class="AddContact" (click)="addContact(employee)">
+                    <ion-icon  item-left>
+                        <img src="AddUser.png">
+                    </ion-icon>   <!--name="person-add"-->
+                    Add to Contacts
+                </button>
+                
+            </ion-item>
+        </ion-list>
+
+        <ion-item [hidden]="employees.length > 0" text-wrap >
+            <ion-label color="danger" >{{NoEmpFoundMessage}}</ion-label>
+        </ion-item>
+
+    </div>
+</ion-content>

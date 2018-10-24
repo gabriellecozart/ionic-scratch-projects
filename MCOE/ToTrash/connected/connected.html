@@ -1,0 +1,105 @@
+<!--
+  Generated template for the Connected page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+   
+  <ion-navbar color="primary">
+      <!--<button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+      </button>-->
+    <ion-title>Headlines on the go</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+    <!--<ion-item>
+        <ion-label style="color:goldenrod;font-weight:bold;">Show alert</ion-label>
+        <ion-toggle color="dark" [(ngModel)]="showBreakingNews"></ion-toggle>
+    </ion-item>-->
+    <!--<ion-list text-wrap *ngIf="showBreakingNews" >-->
+        <ion-list-header color="danger" text-wrap *ngIf="showBreakingNews">
+            <ion-label>{{alertMsg}}</ion-label>
+        </ion-list-header>
+    <!--</ion-list>-->
+    <div>
+        <ion-slides autoplay="5000" loop="true" speed="3000" *ngIf="slides.length">
+
+            <ion-slide *ngFor="let slide of slides" (tap)="slideTapped(slide)">
+                <!--{{slide.headline}}-->
+                <img src={{slide.pictureUrl}} />
+            </ion-slide>
+        </ion-slides>
+    </div>
+
+        <ion-grid>
+        <ion-row>
+            <ion-col>
+                <button color="photo-upload-primary" ion-button class="button-large" (click)="navigateToPhotoUploadApp()">
+                    <ion-icon class="ion-large" name="image"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button color="directory-lookup-primary" ion-button class="button-large">
+                    <ion-icon class="ion-large" name="people"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button color="notes-and-tasks-primary" ion-button class="button-large">
+                    <ion-icon class="ion-large" name="paper"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button color="maps-and-directions-primary" ion-button class="button-large" (click)="navigateToMapsAndDirectionsApp()">
+                    <ion-icon class="ion-large" name="car"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button color="room-finder-primary" ion-button class="button-large" (click)="navigateToRoomFinderApp()">
+                    <ion-icon class="ion-large" name="pin"></ion-icon>
+                </button>
+            </ion-col>
+            <ion-col>
+                <button color="bonfire-primary" ion-button class="button-large">
+                    <ion-icon class="ion-large" name="bonfire"></ion-icon>
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    
+    <ion-list text-wrap *ngIf="stories.length">
+        <ion-item *ngFor="let story of stories" (tap)="storyTapped(story)">
+            <label *ngIf="story.isTopStory"><strong>Top Story</strong></label>
+            <p style="color:darkmagenta">{{story.dateCreated}}</p>
+            <h2 style="color:dodgerblue; font-weight:bold">{{story.title}}</h2>
+            <div [innerHTML] ="story.summary "></div>
+             <!--<div [innerHTML] ="story.summary | safe:'html'"></div>-->
+        </ion-item>
+
+    </ion-list>
+    <ion-list text-wrap *ngIf="videos.length">
+        <ion-item-divider>
+            Videos
+        </ion-item-divider>
+        <ion-item *ngFor="let video of videos">
+            {{video.title}}
+            <video width="320" height="240"  controls poster={{video.picture}} >
+                <source src={{video.linkToVideo}}>
+                <p>Your browser doesn't support HTML5 video.</p>
+            </video>
+        </ion-item>
+    </ion-list>
+</ion-content>
+
+<ion-footer>
+    <ion-navbar color="primary">
+
+        <ion-title>Hackathon 2017</ion-title>
+    </ion-navbar>
+</ion-footer>

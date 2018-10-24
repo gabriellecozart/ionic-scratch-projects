@@ -1,0 +1,66 @@
+<!--
+  Generated template for the PublicReleasePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+  <ion-navbar>
+    <ion-title>Non-Employee</ion-title>
+
+      <ion-buttons end>
+        <button ion-button icon-only (click)="addRelease()">
+          <ion-icon name="add"></ion-icon>
+          Release
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div *ngFor="let release of releases">
+    <ion-list>
+      <ion-list-header>
+        Personal Info
+      </ion-list-header>
+      <ion-item>
+        <ion-input placeholder="First Name" [(ngModel)]="release.fname" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Last Name" [(ngModel)]="release.lname" type="text"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        Contact Info
+      </ion-list-header>
+      <ion-item>
+        <ion-input placeholder="Email" [(ngModel)]="release.email" type="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input placeholder="Phone" [(ngModel)]="phoneNumber" [textMask]="{mask: masks.phoneNumber}" type="tel"></ion-input>
+      </ion-item>
+    </ion-list>
+
+
+    <ion-list>
+      <ion-list-header>
+        Release
+      </ion-list-header>
+      <ion-item>
+        <ion-label text-wrap>I give SCANA permission to use this picture</ion-label>
+        <ion-checkbox item-end [(ngModel)]="release.release"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </div>
+
+
+  <!-- <button ion-button (click)=complete() [disabled]="!isFormFilled()">Agree</button> -->
+  <button ion-button color="light" (click)="cancelButton()">Cancel</button>
+
+  <button ion-button (click)=complete() [disabled]="releasesAgreed()">Agree</button>
+
+
+</ion-content>

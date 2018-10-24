@@ -1,0 +1,38 @@
+<!--
+  Generated template for the RoomFinderMenuPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+
+  <ion-navbar color="room-finder-primary">
+    <ion-title>{{ lookingForRoom ? selectedRoom : 'Room Finder' }}</ion-title>
+    <ion-buttons start>
+      <button *ngIf="lookingForRoom" ion-button clear
+      color="danger" (click)="cancelSearch()">Cancel</button>
+      <button *ngIf="!lookingForRoom" ion-button clear
+      (click)="navigateToHomePage()">
+        <ion-icon name="home"></ion-icon>
+      </button> 
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="navigateToSearchRoomModal()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+  
+</ion-header>
+
+<ion-content>
+ 
+  <div #map id="map"></div>
+  <ion-fab top left>
+    <button ion-fab mini color="room-finder-secondary" (click)="presentLocation()">
+      <ion-icon name="body"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>
