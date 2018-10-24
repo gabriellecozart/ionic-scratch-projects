@@ -1,0 +1,36 @@
+<!--
+  Generated template for the ProfileSearchResultsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Results</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-item *ngIf="user">
+    <ion-avatar item-left>
+      <img [src]="user.avatar_url">
+    </ion-avatar>
+    <h2>{{user.name}}</h2>
+    <h3>{{user.company}}</h3>
+    <p>{{user.location}}</p>
+    <p text-wrap>{{user.bio}}</p>
+  </ion-item>
+
+  <ion-card *ngFor="let repo of repositories">
+    <ion-card-header>
+      <ion-card-title>{{repo.name}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{repo.description}}
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
