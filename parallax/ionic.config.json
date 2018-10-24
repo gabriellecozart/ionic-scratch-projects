@@ -1,0 +1,7 @@
+{
+  "name": "parallax",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
