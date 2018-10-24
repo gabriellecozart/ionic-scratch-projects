@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      About
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <button ion-button (click)="sendEmail()">Send Email</button>
+  <ion-item>
+    <ion-input placeholder="uri scheme" [(ngModel)]="appToCheck"></ion-input>
+  </ion-item>
+  <button ion-button (click)="checkAvail()">Check Availability</button>
+  <button ion-button (click)="openApp()">Open App</button>
+  
+</ion-content>
